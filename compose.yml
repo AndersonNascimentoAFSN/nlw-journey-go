@@ -21,6 +21,8 @@ services:
       POSTGRES_PASSWORD: ${JOURNEY_DATABASE_PASSWORD}
     volumes:
       - db:/var/lib/postgresql/data
+    networks:
+      - journey
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -48,6 +50,8 @@ services:
     depends_on:
       - db
       - pgadmin
+    networks:
+      - journey
 
 volumes:
   db:
@@ -56,3 +60,7 @@ volumes:
     driver: local
   mailpit:
     driver: local
+
+networks:
+  journey:
+    driver: bridge
